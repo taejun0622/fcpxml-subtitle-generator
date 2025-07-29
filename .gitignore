@@ -9,3 +9,12 @@ __pycache__/
 *.pyz
 
 .venv/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
