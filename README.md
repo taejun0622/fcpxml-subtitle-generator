@@ -4,17 +4,18 @@
 [![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A powerful CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using OpenAI's Whisper AI transcription.
+A powerful CLI tool to generate subtitle files for **Final Cut Pro (FCPXML)** and **Adobe Premiere Pro (SRT)** from audio/video files using OpenAI's Whisper AI transcription.
 
 ## 🚀 Features
 
+- **Multiple output formats**: FCPXML for Final Cut Pro, SRT for Premiere Pro and other editors
 - **Multiple file format support**: MP3, MP4, WAV, M4A
 - **Automatic audio extraction**: Extracts audio from MP4 video files
 - **AI-powered transcription**: Uses OpenAI Whisper for accurate speech-to-text
-- **Final Cut Pro integration**: Generates FCPXML subtitle files compatible with Final Cut Pro
+- **Final Cut Pro integration**: Generates FCPXML subtitle files with frame-accurate timing (30fps)
+- **Adobe Premiere Pro support**: Generates SRT subtitle files for universal compatibility
 - **Multiple model sizes**: Choose from tiny, base, small, medium, or large Whisper models for speed/quality balance
 - **Multi-language support**: Auto-detect or specify language for better accuracy
-- **Frame-accurate timing**: Generates subtitles with precise frame boundaries (30fps)
 - **Easy installation**: Available on PyPI with simple pip install
 
 ## 📦 Installation
@@ -33,30 +34,33 @@ pip install fcpxml-subtitle-generator
 
 ### Basic Usage
 
-Generate subtitles from an audio file:
+Generate Final Cut Pro subtitles from an audio file:
 ```bash
 fs-gen input.mp3
 ```
 
-Generate subtitles from a video file (audio will be extracted automatically):
+Generate Premiere Pro subtitles from a video file:
 ```bash
-fs-gen input.mp4
+fs-gen input.mp4 -f srt
 ```
 
 ### Advanced Usage
 
 ```bash
+# Generate SRT for Premiere Pro
+fs-gen input.mp3 -f srt
+
 # Specify output file
 fs-gen input.mp3 -o custom_subtitles.fcpxml
 
 # Use a different Whisper model (higher quality but slower)
-fs-gen input.mp3 -m large
+fs-gen input.mp3 -m large -f srt
 
 # Specify language for better accuracy
-fs-gen input.mp3 -l en
+fs-gen input.mp3 -l en -f srt
 
-# Combine all options
-fs-gen input.mp4 -o subtitles.fcpxml -m medium -l ko
+# Combine all options for Premiere Pro
+fs-gen input.mp4 -f srt -o subtitles.srt -m medium -l ko
 ```
 
 ## 📋 Command Line Arguments
@@ -64,7 +68,8 @@ fs-gen input.mp4 -o subtitles.fcpxml -m medium -l ko
 | Argument | Short | Description | Default |
 |----------|--------|-------------|---------|
 | `input_file` | - | Path to input audio/video file | Required |
-| `--output` | `-o` | Output FCPXML file path | `input_filename.fcpxml` |
+| `--output` | `-o` | Output subtitle file path | `input_filename.fcpxml` or `.srt` |
+| `--format` | `-f` | Output format (`fcpxml` or `srt`) | `fcpxml` |
 | `--model` | `-m` | Whisper model size | `base` |
 | `--language` | `-l` | Language code (e.g., 'en', 'ko', 'ja') | Auto-detect |
 | `--help` | `-h` | Show help message | - |
@@ -95,8 +100,9 @@ Common language codes:
 
 *Auto-detection is used when no language is specified.*
 
-## 🎬 Output Format
+## 🎬 Output Formats
 
+### FCPXML (Final Cut Pro)
 The tool generates FCPXML files that can be directly imported into Final Cut Pro as subtitle tracks:
 
 - **Format**: FCPXML 1.11 standard
@@ -105,24 +111,32 @@ The tool generates FCPXML files that can be directly imported into Final Cut Pro
 - **Timing**: Frame-accurate subtitle positioning
 - **Effect**: Uses Basic Title effect for Final Cut Pro compatibility
 
+### SRT (Premiere Pro & Universal)
+The tool also generates SRT files compatible with Adobe Premiere Pro and most video editors:
+
+- **Format**: SubRip Subtitle (.srt) standard
+- **Time Format**: HH:MM:SS,mmm → HH:MM:SS,mmm
+- **Text Encoding**: UTF-8
+- **Compatibility**: Adobe Premiere Pro, DaVinci Resolve, Avid, YouTube, Vimeo, and more
+
 ## 💡 Usage Examples
 
-### Process a Podcast
+### Process a Podcast for Final Cut Pro
 ```bash
 fs-gen podcast.mp3
 # Output: podcast.fcpxml
 ```
 
-### Video Interview with Korean Language
+### Video Interview for Premiere Pro with Korean Language
 ```bash
-fs-gen interview.mp4 -l ko -m medium
-# Output: interview.fcpxml
+fs-gen interview.mp4 -f srt -l ko -m medium
+# Output: interview.srt
 ```
 
-### High-Quality Transcription for Presentation
+### High-Quality Transcription for Premiere Pro
 ```bash
-fs-gen presentation.mp4 -m large -o presentation_subs.fcpxml
-# Output: presentation_subs.fcpxml
+fs-gen presentation.mp4 -f srt -m large -o presentation_subs.srt
+# Output: presentation_subs.srt
 ```
 
 ### Batch Processing (Shell)
