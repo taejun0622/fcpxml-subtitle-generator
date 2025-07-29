@@ -1,11 +1,28 @@
 Metadata-Version: 2.4
-Name: subtitle-automation
+Name: fcpxml-subtitle-generator
 Version: 0.1.0
 Summary: CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using Whisper
+Author-email: Your Name <your.email@example.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/yourusername/subtitle_automation
+Project-URL: Repository, https://github.com/yourusername/subtitle_automation
+Project-URL: Issues, https://github.com/yourusername/subtitle_automation/issues
+Keywords: subtitle,whisper,final-cut-pro,transcription,video,audio
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Multimedia :: Video
+Classifier: Topic :: Multimedia :: Sound/Audio :: Speech
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: OS Independent
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: moviepy>=2.2.1
 Requires-Dist: openai-whisper>=20250625
+Dynamic: license-file
 
 # Subtitle Automation
 

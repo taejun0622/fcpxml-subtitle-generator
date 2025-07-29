@@ -1,9 +1,0 @@
-README.md
-pyproject.toml
-subtitle_generator.py
-subtitle_automation.egg-info/PKG-INFO
-subtitle_automation.egg-info/SOURCES.txt
-subtitle_automation.egg-info/dependency_links.txt
-subtitle_automation.egg-info/entry_points.txt
-subtitle_automation.egg-info/requires.txt
-subtitle_automation.egg-info/top_level.txt
