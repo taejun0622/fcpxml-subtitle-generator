@@ -35,28 +35,28 @@ pip install fcpxml-subtitle-generator
 
 Generate subtitles from an audio file:
 ```bash
-fcpxml-subtitle-gen input.mp3
+fs-gen input.mp3
 ```
 
 Generate subtitles from a video file (audio will be extracted automatically):
 ```bash
-fcpxml-subtitle-gen input.mp4
+fs-gen input.mp4
 ```
 
 ### Advanced Usage
 
 ```bash
 # Specify output file
-fcpxml-subtitle-gen input.mp3 -o custom_subtitles.fcpxml
+fs-gen input.mp3 -o custom_subtitles.fcpxml
 
 # Use a different Whisper model (higher quality but slower)
-fcpxml-subtitle-gen input.mp3 -m large
+fs-gen input.mp3 -m large
 
 # Specify language for better accuracy
-fcpxml-subtitle-gen input.mp3 -l en
+fs-gen input.mp3 -l en
 
 # Combine all options
-fcpxml-subtitle-gen input.mp4 -o subtitles.fcpxml -m medium -l ko
+fs-gen input.mp4 -o subtitles.fcpxml -m medium -l ko
 ```
 
 ## 📋 Command Line Arguments
@@ -109,19 +109,19 @@ The tool generates FCPXML files that can be directly imported into Final Cut Pro
 
 ### Process a Podcast
 ```bash
-fcpxml-subtitle-gen podcast.mp3
+fs-gen podcast.mp3
 # Output: podcast.fcpxml
 ```
 
 ### Video Interview with Korean Language
 ```bash
-fcpxml-subtitle-gen interview.mp4 -l ko -m medium
+fs-gen interview.mp4 -l ko -m medium
 # Output: interview.fcpxml
 ```
 
 ### High-Quality Transcription for Presentation
 ```bash
-fcpxml-subtitle-gen presentation.mp4 -m large -o presentation_subs.fcpxml
+fs-gen presentation.mp4 -m large -o presentation_subs.fcpxml
 # Output: presentation_subs.fcpxml
 ```
 
@@ -129,7 +129,7 @@ fcpxml-subtitle-gen presentation.mp4 -m large -o presentation_subs.fcpxml
 ```bash
 # Process all MP4 files in current directory
 for file in *.mp4; do
-    fcpxml-subtitle-gen "$file" -m base -l en
+    fs-gen "$file" -m base -l en
 done
 ```
 
@@ -147,8 +147,8 @@ done
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/subtitle_automation.git
-cd subtitle_automation
+git clone https://github.com/taejun0622/fcpxml-subtitle-generator.git
+cd fcpxml-subtitle-generator
 
 # Install in development mode
 pip install -e .
@@ -188,13 +188,13 @@ sudo apt install ffmpeg
 **Out of memory error:**
 ```bash
 # Use a smaller model
-fcpxml-subtitle-gen input.mp4 -m tiny
+fs-gen input.mp4 -m tiny
 ```
 
 **Wrong language detected:**
 ```bash
 # Specify the language explicitly
-fcpxml-subtitle-gen input.mp3 -l ko
+fs-gen input.mp3 -l ko
 ```
 
 ## 📄 License

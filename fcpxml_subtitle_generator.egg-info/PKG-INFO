@@ -2,11 +2,11 @@ Metadata-Version: 2.4
 Name: fcpxml-subtitle-generator
 Version: 0.1.1
 Summary: CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using Whisper
-Author-email: Your Name <your.email@example.com>
+Author-email: Taejun <dugudugu0622@gmail.com>
 License-Expression: MIT
-Project-URL: Homepage, https://github.com/yourusername/fcpxml-subtitle-generator
-Project-URL: Repository, https://github.com/yourusername/fcpxml-subtitle-generator
-Project-URL: Issues, https://github.com/yourusername/fcpxml-subtitle-generator/issues
+Project-URL: Homepage, https://github.com/taejun0622/fcpxml-subtitle-generator
+Project-URL: Repository, https://github.com/taejun0622/fcpxml-subtitle-generator
+Project-URL: Issues, https://github.com/taejun0622/fcpxml-subtitle-generator/issues
 Keywords: subtitle,whisper,final-cut-pro,transcription,video,audio
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
@@ -173,7 +173,7 @@ done
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/subtitle_automation.git
+git clone https://github.com/taejun0622/subtitle_automation.git
 cd subtitle_automation
 
 # Install in development mode
