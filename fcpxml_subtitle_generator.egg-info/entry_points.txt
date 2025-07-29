@@ -1,2 +1,2 @@
 [console_scripts]
-subtitle-gen = subtitle_generator:main
+fs-gen = subtitle_generator:main

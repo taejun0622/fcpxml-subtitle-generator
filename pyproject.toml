@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fcpxml-subtitle-generator"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using Whisper"
 readme = "README.md"
 license = "MIT"
@@ -30,12 +30,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/subtitle_automation"
-Repository = "https://github.com/yourusername/subtitle_automation"
-Issues = "https://github.com/yourusername/subtitle_automation/issues"
+Homepage = "https://github.com/yourusername/fcpxml-subtitle-generator"
+Repository = "https://github.com/yourusername/fcpxml-subtitle-generator"
+Issues = "https://github.com/yourusername/fcpxml-subtitle-generator/issues"
 
 [project.scripts]
-subtitle-gen = "subtitle_generator:main"
+fs-gen = "subtitle_generator:main"
 
 [tool.setuptools]
 py-modules = ["subtitle_generator"]
