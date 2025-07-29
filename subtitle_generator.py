@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CLI tool to generate Final Cut Pro compatible subtitle files from MP3/MP4 files using Whisper.
+CLI tool to generate subtitle files (Final Cut Pro FCPXML and SRT) from MP3/MP4 files using Whisper.
 """
 
 import argparse
@@ -45,6 +45,15 @@ def format_time_fcpxml(seconds):
     return f"{frames * 1001}/30000s"
 
 
+def format_time_srt(seconds):
+    """Convert seconds to SRT time format (HH:MM:SS,mmm)."""
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    secs = int(seconds % 60)
+    milliseconds = int((seconds % 1) * 1000)
+    return f"{hours:02d}:{minutes:02d}:{secs:02d},{milliseconds:03d}"
+
+
 def generate_fcpxml_subtitle(transcription_result, output_path):
     """Generate Final Cut Pro compatible FCPXML subtitle file."""
     try:
@@ -87,9 +96,28 @@ def generate_fcpxml_subtitle(transcription_result, output_path):
         return False
 
 
+def generate_srt_subtitle(transcription_result, output_path):
+    """Generate SRT subtitle file compatible with Premiere Pro and other editors."""
+    try:
+        with open(output_path, 'w', encoding='utf-8') as f:
+            for i, segment in enumerate(transcription_result['segments'], 1):
+                start_time = format_time_srt(segment['start'])
+                end_time = format_time_srt(segment['end'])
+                text = segment['text'].strip()
+                
+                f.write(f"{i}\n")
+                f.write(f"{start_time} --> {end_time}\n")
+                f.write(f"{text}\n\n")
+        
+        return True
+    except Exception as e:
+        print(f"Error generating SRT file: {e}")
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate Final Cut Pro compatible subtitles from MP3/MP4 files using Whisper"
+        description="Generate subtitle files (FCPXML for Final Cut Pro, SRT for Premiere Pro) from MP3/MP4 files using Whisper"
     )
     parser.add_argument(
         "input_file",
@@ -97,7 +125,13 @@ def main():
     )
     parser.add_argument(
         "-o", "--output",
-        help="Output subtitle file path (default: input_filename.fcpxml)"
+        help="Output subtitle file path (default: input_filename.fcpxml or .srt based on format)"
+    )
+    parser.add_argument(
+        "-f", "--format",
+        choices=["fcpxml", "srt"],
+        default="fcpxml",
+        help="Output format: fcpxml for Final Cut Pro, srt for Premiere Pro/others (default: fcpxml)"
     )
     parser.add_argument(
         "-m", "--model",
@@ -128,9 +162,13 @@ def main():
     if args.output:
         output_path = Path(args.output)
     else:
-        output_path = input_path.with_suffix('.fcpxml')
+        if args.format == "srt":
+            output_path = input_path.with_suffix('.srt')
+        else:
+            output_path = input_path.with_suffix('.fcpxml')
     
     print(f"Processing: {input_path}")
+    print(f"Format: {args.format.upper()}")
     print(f"Model: {args.model}")
     if args.language:
         print(f"Language: {args.language}")
@@ -164,11 +202,17 @@ def main():
         sys.exit(1)
     
     # Generate subtitle file
-    print("Generating FCPXML subtitle file...")
-    if generate_fcpxml_subtitle(transcription, output_path):
-        print(f"Subtitle file created: {output_path}")
+    if args.format == "srt":
+        print("Generating SRT subtitle file...")
+        success = generate_srt_subtitle(transcription, output_path)
     else:
-        print("Failed to generate subtitle file.")
+        print("Generating FCPXML subtitle file...")
+        success = generate_fcpxml_subtitle(transcription, output_path)
+    
+    if success:
+        print(f"✅ {args.format.upper()} subtitle file created: {output_path}")
+    else:
+        print("❌ Failed to generate subtitle file.")
         if temp_audio_file:
             os.unlink(temp_audio_file.name)
         sys.exit(1)
