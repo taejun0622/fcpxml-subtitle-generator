@@ -1,3 +1,12 @@
+Metadata-Version: 2.4
+Name: subtitle-automation
+Version: 0.1.0
+Summary: CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using Whisper
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: moviepy>=2.2.1
+Requires-Dist: openai-whisper>=20250625
+
 # Subtitle Automation
 
 A CLI tool to generate Final Cut Pro compatible subtitle files from audio/video files using OpenAI's Whisper.
